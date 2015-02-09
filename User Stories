@@ -1,0 +1,6 @@
+1) The user runs the program for the first time and the base hashes file is made.
+2) The user then selects the option in the main menu to either hash their selected directories or to select the directories that they want to be checked for changes.
+3) If the user hits the hash option, the selected files in the directories are hashed and compared against previous stored hashes to check for changes.
+4) Once the hashing is complete, the files with changed values are displayed for the user.
+5) The user can then select directories from this list that they do not want to be hashed again in the future.
+6) If the user selects the option to select directories, then they can deselect particular files or directories that they do not want to be hashed to be checked for changes.
