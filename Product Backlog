@@ -1,0 +1,17 @@
+BACKLOG
+---------------
+
+GUI
+-Display hash differences
+-priority
+-sorting
+
+Functions
+-create Hash
+-compile hashes
+-compare hashes
+
+SQL
+-create DB
+-Access/modify DB
+-Sort DB
