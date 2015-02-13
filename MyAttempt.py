@@ -6,18 +6,31 @@
 
 import hashlib
 
+# Global Variable(s) 
 BUFFER = 65536
 
-def FileHasher(path):
+# INPUT: filepath 
+# OUTPUT: hash
+# Gives a hash for a given file
+def fileHasher(path):
     hash = hashlib.md5()
-    file = open(path, 'rb')
+    file = open(path.encode('unicode-escape'), 'rb')
     while True:
         text = file.read(BUFFER)
         if not text:
             break
         hash.update(text)
     file.close()
-    return hash
+    return hash.digest() 
+
+# INPUT: 2 hashes
+# OUTPUT: True/False
+# Gives truth value to hash value comparison
+def compareHashes(hash1, hash2):
+    return hash1 == hash2
+    
+def loadDirectories():
+
 
 def main():
     #these files need to be either raw strings or contain \\ instead
