@@ -49,7 +49,7 @@ def hashCollector(folderPath):
     fileList = loadFolderContent(folderPath)
     for i in fileList:
         # combines folder path with file name
-        ourHash = fileHasher(folderPath + i)
+        ourHash = fileHasher(folderPath + r'\\' + i)
         hashFileDict[folderPath+i] = ourHash
     return hashFileDict
 
