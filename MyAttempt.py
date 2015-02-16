@@ -4,7 +4,7 @@
 # Create a function that accepts a file's path, hashes the file,
 # and returns its hash.
 
-import hashlib
+import hashlib, os
 
 # Global Variable(s) 
 BUFFER = 65536
@@ -28,13 +28,20 @@ def fileHasher(path):
 # Gives truth value to hash value comparison
 def compareHashes(hash1, hash2):
     return hash1 == hash2
-    
-def loadDirectories():
 
+# INPUT: N/A
+# OUTPUT: List of directories
+# Get a list of the directories for files to be hashed.
+def loadDirectories():
+    
+
+# INPUT
+# OUTPUT:
+# 
 
 def main():
     #these files need to be either raw strings or contain \\ instead
-    testFile = FileHasher(r'c:\Users\Jarid\a.txt')
+    testFile = FileHasher('c:\Users\Jarid\a.txt')
     print(randomFile.digest())
 
 if __name__ == "__main__":
