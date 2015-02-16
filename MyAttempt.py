@@ -29,7 +29,7 @@ def fileHasher(path):
 def compareHashes(hash1, hash2):
     return hash1 == hash2
 
-# INPUT: N/A
+# INPUT: Path of a folder
 # OUTPUT: List of directories
 # Get a list of the files in a directory to be hashed.
 def loadFolderContent(folderPath):
