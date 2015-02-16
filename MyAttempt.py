@@ -32,12 +32,25 @@ def compareHashes(hash1, hash2):
 # INPUT: N/A
 # OUTPUT: List of directories
 # Get a list of the directories for files to be hashed.
-def loadDirectories():
+def loadFolderContent(folderPath):
+    folderList = os.listdir(folderPath)
+
+# can use this instead to search subdirectories, depends on
+# how we want to setup hashable files
+# root = pathlib.Path('some/path/here')
+# non_empty_dirs = {str(p.parent) for p in root.rglob('*') if p.is_file()}
     
 
-# INPUT
-# OUTPUT:
-# 
+# INPUT: Folder path
+# OUTPUT: Dictionary with paths and their hashes
+# Helps to simplify
+def hashCollector(folderPath):
+    hashFileDict = {}
+    fileList = loadFolderContent(folderPath)
+    for i in fileList:
+        ourHash = fileHasher(folderPath + i)
+        hashFileDict[folderPath+i] = ourHash
+    return hashFileDict
 
 def main():
     #these files need to be either raw strings or contain \\ instead
