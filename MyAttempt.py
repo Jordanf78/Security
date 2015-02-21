@@ -46,12 +46,6 @@ def loadFolderContent(folderPath):
             subfolderList = loadFolderContent(path)
             returnList += subfolderList
     return returnList
-            
-
-# can use this instead to search subdirectories, depends on
-# how we want to setup hashable files
-# root = pathlib.Path('some/path/here')
-# non_empty_dirs = {str(p.parent) for p in root.rglob('*') if p.is_file()}
     
 
 # INPUT: Folder path
