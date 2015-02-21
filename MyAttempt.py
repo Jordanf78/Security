@@ -29,11 +29,24 @@ def fileHasher(path):
 def compareHashes(hash1, hash2):
     return hash1 == hash2
 
-# INPUT: N/A
-# OUTPUT: List of directories
-# Get a list of the directories for files to be hashed.
+# INPUT: path of the folder
+# OUTPUT: List of files
+# Get a list of files to be hashed.
 def loadFolderContent(folderPath):
     folderList = os.listdir(folderPath)
+    returnList = []
+    for i in folderList:
+        path = folderPath + i
+        # if it is a file, add to list for hashing
+        if os.path.isfile(path):
+            returnList.append(path)
+        # if it is a subfolder, find its file paths
+        elif os.path.isdir(path):
+            subfolderList = []
+            subfolderList = loadFolderContent(path)
+            returnList += subfolderList
+    return returnList
+            
 
 # can use this instead to search subdirectories, depends on
 # how we want to setup hashable files
