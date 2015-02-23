@@ -59,10 +59,11 @@ def hashCollector(folderPath):
         hashFileDict[folderPath+i] = ourHash
     return hashFileDict
 
-def main():
-    #these files need to be either raw strings or contain \\ instead
-    testFile = FileHasher('c:\Users\Jarid\a.txt')
-    print(randomFile.digest())
-
-if __name__ == "__main__":
-    main()
+# for specifying drive
+# http://stackoverflow.com/questions/827371/is-there-a-way-to-list-all-the-available-drive-letters-in-python
+##
+##def main():
+##    #these files need to be either raw strings or contain \\ instead
+##
+##if __name__ == "__main__":
+##    main()
