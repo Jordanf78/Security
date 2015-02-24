@@ -21,7 +21,7 @@ def fileHasher(path):
             break
         ourHash.update(text)
     file.close()
-    return hash.hexdigest() 
+    return ourHash.hexdigest() 
 
 # INPUT: 2 hashes
 # OUTPUT: True/False
