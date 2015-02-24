@@ -14,14 +14,14 @@ BUFFER = 65536
 # Gives a hash for a given file
 def fileHasher(path):
     hash = hashlib.md5()
-    file = open(path.encode('unicode-escape'), 'rb')
+    file = open(path, 'rb')
     while True:
         text = file.read(BUFFER)
         if not text:
             break
         hash.update(text)
     file.close()
-    return hash.digest() 
+    return hash.hexdigest() 
 
 # INPUT: 2 hashes
 # OUTPUT: True/False
