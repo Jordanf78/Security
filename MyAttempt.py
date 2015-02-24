@@ -13,13 +13,13 @@ BUFFER = 65536
 # OUTPUT: hash
 # Gives a hash for a given file
 def fileHasher(path):
-    hash = hashlib.md5()
+    ourHash = hashlib.md5()
     file = open(path, 'rb')
     while True:
         text = file.read(BUFFER)
         if not text:
             break
-        hash.update(text)
+        ourHash.update(text)
     file.close()
     return hash.hexdigest() 
 
