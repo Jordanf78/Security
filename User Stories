@@ -4,3 +4,11 @@
 4) Once the hashing is complete, the files with changed values are displayed for the user.
 5) The user can then select directories from this list that they do not want to be hashed again in the future.
 6) If the user selects the option to select directories, then they can deselect particular files or directories that they do not want to be hashed to be checked for changes.
+
+Extra Features User Stories:
+1.) The user can select source files to be encrypted
+2.) The files are encrypted using AES file encryption
+3.) The user can store the encrypted  files locally by selecting a destination
+4.) The user could also sign in with google credentials and store the files on the google drive
+5.) On start, the program will build a list of files encrypted on the google drive
+6.) If the user requests to decrypt a file, the program retrieves the encrypted file from the drive and decrypts.
