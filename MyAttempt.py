@@ -50,16 +50,15 @@ def hashCollector(folderPath):
     hashFileDict = {}
     fileList = loadFolderContent(folderPath)
     for i in fileList:
-        path = folderPath + '\\' + i
-        ourHash = fileHasher(path)
-        hashFileDict[path] = ourHash
+        ourHash = fileHasher(i)
+        hashFileDict[i] = ourHash
     return hashFileDict
 
 # for specifying drive
 # http://stackoverflow.com/questions/827371/is-there-a-way-to-list-all-the-available-drive-letters-in-python
 ##
 ##def main():
-##    #these files need to be either raw strings or contain \\ instead
+##    print(hashCollector(r"C:\Users\Jarid\HashFolder"))
 ##
 ##if __name__ == "__main__":
 ##    main()
