@@ -1,0 +1,10 @@
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\bin\Debug\File Integrity Checker.exe.config
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File_Integrity_Checker.Form1.resources
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File_Integrity_Checker.Resources.resources
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.vbproj.GenerateResource.Cache
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\bin\Debug\File Integrity Checker.exe
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\bin\Debug\File Integrity Checker.pdb
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\bin\Debug\File Integrity Checker.xml
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.exe
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.xml
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.pdb
