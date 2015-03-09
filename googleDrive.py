@@ -6,7 +6,7 @@ from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
 from oauth2client.client import OAuth2WebServerFlow
 
-SCOPE = "https://www.googleapis.com/auth/drive'"
+SCOPE = "https://www.googleapis.com/auth/drive"
 CLIENT_ID = "your_client_id"
 CLIENT_SECRET = "your_client_secret"
 FILENAME = "chirag.txt"
