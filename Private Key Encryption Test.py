@@ -5,11 +5,11 @@
 
 from Crypto.Cipher import AES
 from Crypto import Random
+import os
 
 # INPUT: password for cipher, privateKey for asymmetric hash
 # OUTPUT: encrypted message and vector used for seed
 # Encrypts the private key. All I/O is in bytes object form.
-
 def encryptKey(password, privateKey):
     vector = Random.new().read(AES.block_size)
     cipher = AES.new(password, AES.MODE_CFB, vector)
@@ -24,17 +24,30 @@ def decryptKey(password, vector, encrypted):
     privateKey = (cipher.decrypt(encrypted))
     return privateKey
 
-# INPUT:
-# OUTPUT:
-# Handles the storage of the private key, password hash...
-
-# INPUT:
-# OUTPUT:
-# Turns the password into a hashed value
+# INPUT: Vector for encryption and encrypted key
+# OUTPUT: N/A
+# Stores encrypted private key and vector in a file.
+def storeInFile(vector, encrypted):
+    if os.path.exists(r'C:\CryptoFile'):
+        return
+    else:
+        #want to define specific directory here instead of storing locally
+        file = open('CryptoFile', 'w+b')
+        file.write(vector)
+        file.write(b'|||||')
+        file.write(encrypted)
 
 def main():
     message, vector = encryptKey(b'passwordpassword', b'PRIVATEKEY')
-    privateKey = decryptKey(b'passwordpassword', 
+    print(vector)
+    privateKey = decryptKey(b'passwordpassword', vector, message)
+    print(privateKey)
+    storeInFile(vector, message)
+    file = open(r'CryptoFile', 'r+b')
+    for line in file:
+        print(line)
+    file.close()
+    
 
 if __name__ == "__main__":
     main()
