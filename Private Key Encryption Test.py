@@ -37,17 +37,23 @@ def storeInFile(vector, encrypted):
         file.write(b'|||||')
         file.write(encrypted)
 
+# INPUT: N/A
+# OUTPUT: Encrypted Private Key and Vector
+# Extracts the private key and vector from the file for decryption.
+def removeFromFile():
+    file = open('CryptoFile', 'rb')
+    data = str(file.read())
+    return data.partition('|||||')[::2]
+
 def main():
     message, vector = encryptKey(b'passwordpassword', b'PRIVATEKEY')
-    print(vector)
+    print(vector, message)
     privateKey = decryptKey(b'passwordpassword', vector, message)
     print(privateKey)
     storeInFile(vector, message)
-    file = open(r'CryptoFile', 'r+b')
-    for line in file:
-        print(line)
-    file.close()
-    
+    a,b = removeFromFile()
+    print(a,b)
+# Want to change directories for file
 
 if __name__ == "__main__":
     main()
