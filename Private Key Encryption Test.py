@@ -28,22 +28,30 @@ def decryptKey(password, vector, encrypted):
 # OUTPUT: N/A
 # Stores encrypted private key and vector in a file.
 def storeInFile(vector, encrypted):
-    if os.path.exists(r'C:\CryptoFile'):
-        return
-    else:
-        #want to define specific directory here instead of storing locally
-        file = open('CryptoFile', 'w+b')
-        file.write(vector)
-        file.write(b'|||||')
-        file.write(encrypted)
+    makeSecurityFolder()
+    file = open('C:\SecurityFolder\CryptoFile', 'w+b')
+    file.write(vector)
+    file.write(b'|||||')
+    file.write(encrypted)
+    
 
 # INPUT: N/A
-# OUTPUT: Encrypted Private Key and Vector
+# OUTPUT: Encrypted Private Key and Vector or "FILEDNE" if no file exists
 # Extracts the private key and vector from the file for decryption.
 def removeFromFile():
-    file = open('CryptoFile', 'rb')
-    data = str(file.read())
-    return data.partition('|||||')[::2]
+    if os.path.exists(r'C:\SecurityFolder\CryptoFile'):
+        file = open('C:\SecurityFolder\CryptoFile', 'rb')
+        data = str(file.read())
+        return data.partition('|||||')[::2]
+    else:
+        return "FILEDNE"
+
+# INPUT: N/A
+# OUTPUT: N/A
+# Makes a folder for the program to store files in, if one doesn't exist.
+def makeSecurityFolder():
+    if not os.path.exists(r'C:\SecurityFolder'):
+        os.makedirs(r'C:\SecurityFolder')
 
 def main():
     message, vector = encryptKey(b'passwordpassword', b'PRIVATEKEY')
@@ -53,7 +61,6 @@ def main():
     storeInFile(vector, message)
     a,b = removeFromFile()
     print(a,b)
-# Want to change directories for file
 
 if __name__ == "__main__":
     main()
