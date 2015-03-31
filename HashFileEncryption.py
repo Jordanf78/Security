@@ -25,31 +25,40 @@ def storeHashes(hashDict):
 # OUTPUT: private key or "FILEDNE" if file doesn't exist
 # The hash dict file is encrypted for transfer to the google drive.
 def encryptFile(hashFile):
-    #if os.path.exists(hashFile):
+    if os.path.exists(hashFile):
         privateKey = RSA.generate(1024)
         key = privateKey.publickey()
-        print(privateKey, '\n', key)
         cipher = PKCS1_OAEP.new(key)
-        file = open(hashFile, 'r')
+        file = open(hashFile, 'r+b')
         outputFile = open('C:\SecurityFolder\Encrypted.txt', 'w+b')
         for line in file:
-            print(line)
             outputFile.write(cipher.encrypt(line))
         file.close()
         outputFile.close()
-        
-    #else:
-        #return "FILEDNE"
+        return privateKey
+    else:
+        return "FILEDNE"
 
 # INPUT: file, private key
 # OUTPUT: N/A
 # Decrypts the file when retrieved from the google drive.
-#def decryptFile(hashFile, key):
+def decryptFile(encryptedFile, key):
+    if os.path.exists(encryptedFile):
+        cipher = PKCS1_OAEP.new(key)
+        file = open(encryptedFile, 'r+b')
+        outputFile = open('C:\SecurityFolder\Decrypted.txt', 'w+b')
+        message = file.read(1024)
+        while message != b'':
+            outputFile.write(cipher.decrypt(message))
+            message = file.read(1024)
+        file.close()
+        outputFile.close()
 
 def main():
     d = {'C:\\Users\\Jarid\\HashFolder\\HashSubFolder\\b.txt': '81dc9bdb52d04dc20036dbd8313ed055', 'C:\\Users\\Jarid\\HashFolder\\a.txt': '912ec803b2ce49e4a541068d495ab570'}
     storeHashes(d)
-    encryptFile(r'C:\SecurityFolder\HashFile.txt')
+    key = encryptFile(r'C:\SecurityFolder\HashFile.txt')
+    decryptFile(r'C:\SecurityFolder\Encrypted.txt', key)
 
 if __name__ == "__main__":
     main()
