@@ -5,7 +5,7 @@ Public Class Form1
 
 
     Dim userpath = "users.txt"
-
+    Dim prevdir As String
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -125,13 +125,20 @@ Public Class Form1
         Dim d As DriveInfo
         For Each d In allDrives
             If d.IsReady = True Then
-                Dim string1 As String = d.Name.ToString + vbTab + d.VolumeLabel.ToString
-                FileExplorer.Items.Add(string1)
+                FileExplorer.Items.Add(d.Name.ToString())
             End If
         Next
     End Sub
 
     Private Sub FileExplorer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FileExplorer.SelectedIndexChanged
 
+
+        Dim selectedpath = FileExplorer.SelectedItem.ToString()
+        FileExplorer.Items.Clear()
+        FileExplorer.Items.Add("...")
+        prevdir = selectedpath
+        For Each subdir In Directory.EnumerateDirectories(selectedpath)
+            FileExplorer.Items.Add(subdir + "\")
+        Next
     End Sub
 End Class

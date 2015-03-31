@@ -8,3 +8,4 @@ D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\bin
 D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.exe
 D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.xml
 D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.pdb
+D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.vbprojResolveAssemblyReference.cache
