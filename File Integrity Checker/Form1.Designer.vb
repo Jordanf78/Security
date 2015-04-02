@@ -32,8 +32,12 @@ Partial Class Form1
         Me.LoginButton = New System.Windows.Forms.Button()
         Me.Create = New System.Windows.Forms.Button()
         Me.BackButton = New System.Windows.Forms.Button()
-        Me.ChangeLogBox = New System.Windows.Forms.ListBox()
+        Me.watchlist = New System.Windows.Forms.ListBox()
         Me.FileExplorer = New System.Windows.Forms.ListBox()
+        Me.pathbox = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Refresh = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LocalSignin
@@ -137,31 +141,71 @@ Partial Class Form1
         Me.BackButton.UseVisualStyleBackColor = True
         Me.BackButton.Visible = False
         '
-        'ChangeLogBox
+        'watchlist
         '
-        Me.ChangeLogBox.FormattingEnabled = True
-        Me.ChangeLogBox.Location = New System.Drawing.Point(422, 24)
-        Me.ChangeLogBox.Name = "ChangeLogBox"
-        Me.ChangeLogBox.Size = New System.Drawing.Size(325, 342)
-        Me.ChangeLogBox.TabIndex = 10
-        Me.ChangeLogBox.Visible = False
+        Me.watchlist.FormattingEnabled = True
+        Me.watchlist.Location = New System.Drawing.Point(422, 24)
+        Me.watchlist.Name = "watchlist"
+        Me.watchlist.Size = New System.Drawing.Size(325, 342)
+        Me.watchlist.TabIndex = 10
+        Me.watchlist.Visible = False
         '
         'FileExplorer
         '
         Me.FileExplorer.FormattingEnabled = True
-        Me.FileExplorer.Location = New System.Drawing.Point(16, 24)
+        Me.FileExplorer.HorizontalScrollbar = True
+        Me.FileExplorer.Location = New System.Drawing.Point(16, 50)
         Me.FileExplorer.Name = "FileExplorer"
-        Me.FileExplorer.Size = New System.Drawing.Size(325, 342)
+        Me.FileExplorer.Size = New System.Drawing.Size(325, 316)
         Me.FileExplorer.TabIndex = 11
         Me.FileExplorer.Visible = False
+        '
+        'pathbox
+        '
+        Me.pathbox.Location = New System.Drawing.Point(16, 24)
+        Me.pathbox.Name = "pathbox"
+        Me.pathbox.Size = New System.Drawing.Size(325, 20)
+        Me.pathbox.TabIndex = 12
+        Me.pathbox.Visible = False
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(219, 372)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(123, 46)
+        Me.Button1.TabIndex = 13
+        Me.Button1.Text = "Add to Watchlist"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(16, 372)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(123, 46)
+        Me.Button2.TabIndex = 14
+        Me.Button2.Text = "Remove from Watchlist"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Refresh
+        '
+        Me.Refresh.Location = New System.Drawing.Point(145, 372)
+        Me.Refresh.Name = "Refresh"
+        Me.Refresh.Size = New System.Drawing.Size(68, 46)
+        Me.Refresh.TabIndex = 15
+        Me.Refresh.Text = "Refresh"
+        Me.Refresh.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 562)
+        Me.Controls.Add(Me.Refresh)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.pathbox)
         Me.Controls.Add(Me.FileExplorer)
-        Me.Controls.Add(Me.ChangeLogBox)
+        Me.Controls.Add(Me.watchlist)
         Me.Controls.Add(Me.BackButton)
         Me.Controls.Add(Me.Create)
         Me.Controls.Add(Me.LoginButton)
@@ -189,7 +233,11 @@ Partial Class Form1
     Friend WithEvents LoginButton As System.Windows.Forms.Button
     Friend WithEvents Create As System.Windows.Forms.Button
     Friend WithEvents BackButton As System.Windows.Forms.Button
-    Friend WithEvents ChangeLogBox As System.Windows.Forms.ListBox
+    Friend WithEvents watchlist As System.Windows.Forms.ListBox
     Friend WithEvents FileExplorer As System.Windows.Forms.ListBox
+    Friend WithEvents pathbox As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Refresh As System.Windows.Forms.Button
 
 End Class

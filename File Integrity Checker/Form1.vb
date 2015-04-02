@@ -32,8 +32,12 @@ Public Class Form1
         LoginButton.Visible = False
         Create.Visible = False
         BackButton.Visible = False
-        ChangeLogBox.Visible = False
+        watchlist.Visible = False
         FileExplorer.Visible = False
+        pathbox.Visible = False
+        Button1.Visible = False
+        Button2.Visible = False
+        Refresh.Visible = False
 
     End Sub
 
@@ -110,7 +114,11 @@ Public Class Form1
         undraw_all()
         Me.Size = New Size(800, 600)
         FileExplorer.Visible = True
-        ChangeLogBox.Visible = True
+        watchlist.Visible = True
+        pathbox.Visible = True
+        Button1.Visible = True
+        Button2.Visible = True
+        Refresh.Visible = True
         load_explorer()
     End Sub
 
@@ -130,15 +138,69 @@ Public Class Form1
         Next
     End Sub
 
-    Private Sub FileExplorer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FileExplorer.SelectedIndexChanged
+    Private Sub FileExplorer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FileExplorer.DoubleClick
+        If FileExplorer.SelectedItem.ToString = "..." Then
+            Dim newdir = Directory.GetParent(pathbox.Text)
+            If pathbox.Text.Length = 3 Then
+                pathbox.Text = ""
+            Else
+                pathbox.Text = newdir.ToString()
+            End If
+        Else
+            pathbox.Text = FileExplorer.SelectedItem.ToString()
+
+        End If
+
+    End Sub
+
+    Private Sub FileExplorer_SelectedIndexChanged1(sender As Object, e As EventArgs)
+        If FileExplorer.SelectedItem.ToString = "..." Then
+            Dim newdir = Directory.GetParent(pathbox.Text)
+            Try
+                FileExplorer.Items.Clear()
+                pathbox.Text = newdir.ToString
+                If Not pathbox.Text.Split("\").Length = 1 Then
+                    FileExplorer.Items.Add("...")
+                End If
+                For Each subdir In Directory.EnumerateDirectories(pathbox.Text())
+                    FileExplorer.Items.Add(subdir)
+                Next
+                For Each file1 In Directory.EnumerateFiles(pathbox.Text())
+                    FileExplorer.Items.Add(file1)
+                Next
+            Catch
+                pathbox.Clear()
+                load_explorer()
+            End Try
+        Else
+            pathbox.Text = FileExplorer.SelectedItem.ToString
+            FileExplorer.Items.Clear()
+            FileExplorer.Items.Add("...")
+            For Each subdir In Directory.EnumerateDirectories(pathbox.Text())
+                FileExplorer.Items.Add(subdir)
+            Next
+            For Each file1 In Directory.EnumerateFiles(pathbox.Text())
+                FileExplorer.Items.Add(file1)
+            Next
+        End If
 
 
-        Dim selectedpath = FileExplorer.SelectedItem.ToString()
-        FileExplorer.Items.Clear()
-        FileExplorer.Items.Add("...")
-        prevdir = selectedpath
-        For Each subdir In Directory.EnumerateDirectories(selectedpath)
-            FileExplorer.Items.Add(subdir + "\")
-        Next
+    End Sub
+
+    Private Sub pathbox_TextChanged(sender As Object, e As EventArgs) Handles pathbox.TextChanged
+        If Directory.Exists(pathbox.Text) = True Then
+            FileExplorer.Items.Clear()
+            If Not pathbox.Text.Split("\").Length = 1 Then
+                FileExplorer.Items.Add("...")
+            End If
+            For Each subdir In Directory.EnumerateDirectories(pathbox.Text())
+                FileExplorer.Items.Add(subdir)
+            Next
+            For Each file1 In Directory.EnumerateFiles(pathbox.Text())
+                FileExplorer.Items.Add(file1)
+            Next
+        ElseIf pathbox.Text = "" Then
+            load_explorer()
+        End If
     End Sub
 End Class
