@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.IO
 
 Public Class Form1
@@ -6,12 +6,74 @@ Public Class Form1
 
     Dim userpath = "users.txt"
     Dim prevdir As String
+    Dim watchlistpath = "watchlist.txt"
+    Dim watchlist As New List(Of String)
+    Dim watchflag = False
+    Dim FileList as New List(of String)
+    
+    Private Sub Check_files()
+        If not My.Computer.FileSystem.FileExists(watchlistpath) Then
+            Dim fs As FileStream = File.Create(watchlistpath)
+            fs.Close()
+            watchflag = True
+        End If
+        If not My.Computer.FileSystem.FileExists(userpath) Then
+            Dim fs As FileStream = File.Create(userpath)
+            fs.Close()
+        End If
+    End Sub
+    
+    Private Sub Load_Watchlist()
+        For each file in File.Readlines(watchlistpath)
+            watchlist.Items.add(file)
+        Next
+    End Sub
+    
+    Private Sub Load_All_Files()
+        Dim allDrives() As DriveInfo = DriveInfo.GetDrives()
+        Dim d As DriveInfo
+        For Each d In allDrives
+            If d.IsReady = True Then
+                For each file1 in Directory.EnumerateFiles(drive)
+                    FileList.Items.Add()
+                Next
 
+            End If
+        Next
+
+    End Sub
+    
+    Private Sub SearchFiles()
+        For Each file1 in 
+    End Sub
+    
+    Private Sub Refresh_click(sender As Object, e As EventArgs) Handles Refresh.Click()
+        If Directory.Exists(pathbox.Text.ToString) Then
+            FileExplorer.Items.Clear()
+            If Not pathbox.Text.ToString.Length = 3 Then
+                FileExplorer.Items.add("...")
+                For Each subdir in Directory.EnumerateDirectories(pathbox.Text.ToString) Then
+                    FileExplorer.Items.Add(subdir)
+                Next
+                For Each file1 in Directory.EnumerateFiles(pathbox.Text.ToString)
+                    FileExplorer.Items.Add(file1)
+                Next
+            End If
+        Else If pathbox.Text.ToString.Contains("\") = False Then
+            SearchFiles()
+        Else
+            MsgBox("Directory does not exsist. Check the path and try again.")
+        End If    
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Size(400, 200)
         draw_login_buttons()
-        checkuserfile()
+        Check_files()
+        If watchflag = False Then
+            Load_Watchlist()
+        Else
+            watchlist.Items.Add("")
+        End If
     End Sub
 
     Private Sub draw_login_buttons()
@@ -66,12 +128,7 @@ Public Class Form1
         Create.Visible = True
     End Sub
 
-    Private Sub checkuserfile()
-        If Not System.IO.File.Exists(userpath) Then
-            Dim ope = System.IO.File.Create(userpath)
-            ope.Close()
-        End If
-    End Sub
+
 
     Private Sub Create_Click(sender As Object, e As EventArgs) Handles Create.Click
         Dim found As Boolean = False
@@ -153,39 +210,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub FileExplorer_SelectedIndexChanged1(sender As Object, e As EventArgs)
-        If FileExplorer.SelectedItem.ToString = "..." Then
-            Dim newdir = Directory.GetParent(pathbox.Text)
-            Try
-                FileExplorer.Items.Clear()
-                pathbox.Text = newdir.ToString
-                If Not pathbox.Text.Split("\").Length = 1 Then
-                    FileExplorer.Items.Add("...")
-                End If
-                For Each subdir In Directory.EnumerateDirectories(pathbox.Text())
-                    FileExplorer.Items.Add(subdir)
-                Next
-                For Each file1 In Directory.EnumerateFiles(pathbox.Text())
-                    FileExplorer.Items.Add(file1)
-                Next
-            Catch
-                pathbox.Clear()
-                load_explorer()
-            End Try
-        Else
-            pathbox.Text = FileExplorer.SelectedItem.ToString
-            FileExplorer.Items.Clear()
-            FileExplorer.Items.Add("...")
-            For Each subdir In Directory.EnumerateDirectories(pathbox.Text())
-                FileExplorer.Items.Add(subdir)
-            Next
-            For Each file1 In Directory.EnumerateFiles(pathbox.Text())
-                FileExplorer.Items.Add(file1)
-            Next
-        End If
-
-
-    End Sub
 
     Private Sub pathbox_TextChanged(sender As Object, e As EventArgs) Handles pathbox.TextChanged
         If Directory.Exists(pathbox.Text) = True Then
