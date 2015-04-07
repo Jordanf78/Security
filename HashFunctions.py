@@ -5,10 +5,18 @@
 # that folder and it's subdirectories, and a utility function to combine the
 # file list into a dictionary with each file's hash.
 
-import hashlib, os
+import hashlib, os, re
 
 # Global Variable(s) 
 BUFFER = 65536
+DRIVE = 'C:\\'
+
+# INPUT: N/A
+# OUTPUT: Strings containing the drives available
+# This is useful to define the letter of the drive to be used
+def availableDrives():
+    # pattern, string to search, flag
+    return re.findall(r"[A-Z]+:.*$",os.popen("mountvol /").read(),re.MULTILINE)
 
 # INPUT: Path of a file
 # OUTPUT: Hash of input file
@@ -54,10 +62,8 @@ def hashCollector(folderPath):
         hashFileDict[i] = ourHash
     return hashFileDict
 
-# for specifying drive
-# http://stackoverflow.com/questions/827371/is-there-a-way-to-list-all-the-available-drive-letters-in-python
-
 def main():
+    print(availableDrives())
     print(hashCollector(r"C:\Users\Jarid\HashFolder"))
 
 if __name__ == "__main__":
