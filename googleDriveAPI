@@ -18,7 +18,7 @@ OAUTH2_SCOPE = 'https://www.googleapis.com/auth/drive'
 
 # Location of the client secrets.
 CLIENT_ID = '267493388710-a5qadhlhjovkf1tj59489pd4u4lqeqpr.apps.googleusercontent.com'
-CLIENT_SECRETS = ''
+CLIENT_SECRETS = 'Your Client Secret'
 
 # Path to the file to upload.
 FILENAME = 'document.txt'
