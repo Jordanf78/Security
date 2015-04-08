@@ -24,8 +24,12 @@ Public Class Form1
     End Sub
     
     Private Sub Load_Watchlist()
-        For each file in File.Readlines(watchlistpath)
-            watchlist.Items.add(file)
+        For each file in File.Readlines
+            for each curfile in watchlist.Items()
+                If not file = curfile Then
+                    watchlist.Items.add(file)
+                End If
+            Next
         Next
     End Sub
     
@@ -100,7 +104,6 @@ Public Class Form1
         Button1.Visible = False
         Button2.Visible = False
         Refresh.Visible = False
-
     End Sub
 
     Private Sub draw_login()
@@ -181,7 +184,6 @@ Public Class Form1
 
     Private Sub BackButton_Click(sender As Object, e As EventArgs) Handles BackButton.Click
         draw_login_buttons()
-
     End Sub
 
     Private Sub load_explorer()
@@ -205,9 +207,7 @@ Public Class Form1
             End If
         Else
             pathbox.Text = FileExplorer.SelectedItem.ToString()
-
         End If
-
     End Sub
 
 
