@@ -23,6 +23,22 @@ Public Class Form1
         End If
     End Sub
     
+    Private Sub Clean_watchlist()
+        For Each item in watchlist
+            For Each item2 in watchlist
+                If item = item2 Then
+                    watchlist.Items.Remove(watchlist.Items.Indexof(item))
+                End If
+            Next
+        Next
+    End Sub 
+    
+    Private Sub Refresh_Watchlistbox()
+        For Each item in watchlist
+            watchlistbox.Items.Add(item)
+        Next
+    End Sub
+    
     Private Sub Load_Watchlist()
         For each file in File.Readlines
             for each curfile in watchlist.Items()
@@ -221,7 +237,15 @@ Public Class Form1
                 FileExplorer.Items.Add(subdir)
             Next
             For Each file1 In Directory.EnumerateFiles(pathbox.Text())
-                FileExplorer.Items.Add(file1)
+            Dim flag1 = False
+                For Each currentitem in watchlist
+                    If currentitem = file1 Then
+                        flag1 = True
+                    End If
+                Next
+                If flag1 = False Then
+                    FileExplorer.Items.Add(file1)
+                End If
             Next
         ElseIf pathbox.Text = "" Then
             load_explorer()
