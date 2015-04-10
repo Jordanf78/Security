@@ -9,3 +9,14 @@ D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj
 D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.xml
 D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.pdb
 D:\School\FileIntegrityChecker\File Integrity Checker\File Integrity Checker\obj\Debug\File Integrity Checker.vbprojResolveAssemblyReference.cache
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\File Integrity Checker.exe.config
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File Integrity Checker.exe
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File Integrity Checker.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File Integrity Checker.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File Integrity Checker.vbprojResolveAssemblyReference.cache
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File_Integrity_Checker.Form1.resources
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File_Integrity_Checker.Resources.resources
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File Integrity Checker.vbproj.GenerateResource.Cache
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\File Integrity Checker.exe
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\File Integrity Checker.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\File Integrity Checker.xml

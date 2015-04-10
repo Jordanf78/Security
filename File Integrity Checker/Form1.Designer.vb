@@ -144,9 +144,9 @@ Partial Class Form1
         'watchlist
         '
         Me.watchlist.FormattingEnabled = True
-        Me.watchlist.Location = New System.Drawing.Point(422, 24)
+        Me.watchlist.Location = New System.Drawing.Point(422, 50)
         Me.watchlist.Name = "watchlist"
-        Me.watchlist.Size = New System.Drawing.Size(325, 342)
+        Me.watchlist.Size = New System.Drawing.Size(325, 316)
         Me.watchlist.TabIndex = 10
         Me.watchlist.Visible = False
         '
@@ -170,27 +170,27 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(219, 372)
+        Me.Button1.Location = New System.Drawing.Point(347, 85)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(123, 46)
+        Me.Button1.Size = New System.Drawing.Size(69, 65)
         Me.Button1.TabIndex = 13
         Me.Button1.Text = "Add to Watchlist"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(16, 372)
+        Me.Button2.Location = New System.Drawing.Point(347, 251)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(123, 46)
+        Me.Button2.Size = New System.Drawing.Size(69, 56)
         Me.Button2.TabIndex = 14
         Me.Button2.Text = "Remove from Watchlist"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Refresh
         '
-        Me.Refresh.Location = New System.Drawing.Point(145, 372)
+        Me.Refresh.Location = New System.Drawing.Point(347, 173)
         Me.Refresh.Name = "Refresh"
-        Me.Refresh.Size = New System.Drawing.Size(68, 46)
+        Me.Refresh.Size = New System.Drawing.Size(69, 55)
         Me.Refresh.TabIndex = 15
         Me.Refresh.Text = "Refresh"
         Me.Refresh.UseVisualStyleBackColor = True
