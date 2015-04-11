@@ -24,43 +24,45 @@ def decryptKey(password, vector, encrypted):
     privateKey = (cipher.decrypt(encrypted))
     return privateKey
 
-# INPUT: Vector for encryption and encrypted key
+# INPUT: Vector for encryption, encrypted key, and hard drive letter
 # OUTPUT: N/A
 # Stores encrypted private key and vector in a file.
-def storeInFile(vector, encrypted):
-    makeSecurityFolder()
-    file = open('C:\SecurityFolder\CryptoFile', 'w+b')
+def storeInFile(vector, encrypted, DRIVE):
+    makeSecurityFolder(DRIVE)
+    file = open(DRIVE + r'SecurityFolder\CryptoFile.txt', 'w+b')
     file.write(vector)
     file.write(b'|||||')
     file.write(encrypted)
+    file.close()
     
 
-# INPUT: N/A
+# INPUT: hard drive letter
 # OUTPUT: Encrypted Private Key and Vector or "FILEDNE" if no file exists
 # Extracts the private key and vector from the file for decryption.
-def removeFromFile():
-    if os.path.exists(r'C:\SecurityFolder\CryptoFile'):
-        file = open('C:\SecurityFolder\CryptoFile', 'rb')
+def removeFromFile(DRIVE):
+    if os.path.exists(DRIVE + r'SecurityFolder\CryptoFile.txt'):
+        file = open(DRIVE + r'SecurityFolder\CryptoFile.txt', 'rb')
         data = str(file.read())
+        file.close()
         return data.partition('|||||')[::2]
     else:
         return "FILEDNE"
 
-# INPUT: N/A
+# INPUT: hard drive letter
 # OUTPUT: N/A
 # Makes a folder for the program to store files in, if one doesn't exist.
-def makeSecurityFolder():
-    if not os.path.exists(r'C:\SecurityFolder'):
-        os.makedirs(r'C:\SecurityFolder')
+def makeSecurityFolder(DRIVE):
+    if not os.path.exists(DRIVE + r'SecurityFolder'):
+        os.makedirs(DRIVE + r'SecurityFolder')
 
-def main():
-    message, vector = encryptKey(b'passwordpassword', b'PRIVATEKEY')
-    print(vector, message)
-    privateKey = decryptKey(b'passwordpassword', vector, message)
-    print(privateKey)
-    storeInFile(vector, message)
-    a,b = removeFromFile()
-    print(a,b)
-
-if __name__ == "__main__":
-    main()
+##def main():
+##    message, vector = encryptKey(b'passwordpassword', b'PRIVATEKEY')
+##    print(vector, message)
+##    privateKey = decryptKey(b'passwordpassword', vector, message)
+##    print(privateKey)
+##    storeInFile(vector, message, 'C:\\')
+##    a,b = removeFromFile('C:\\')
+##    print(a,b)
+##
+##if __name__ == "__main__":
+##    main()
