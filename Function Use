@@ -1,0 +1,23 @@
+Call hashCollector(folders) on all the folders with subdirectories to be hashed
+Once you have a dictionary with all of these combined, we can move onto the comparison.
+
+availableDrives() - returns letter names of drives for storage/access
+
+use storeHashes(DRIVE, dict) to store locally, not on Google Drive
+
+# for comparing the files
+
+if (os.path.exists(DRIVE + r’SecurityFolder\HashFile.txt’)):
+	compareHashes(hashCollectorDict, dict from above) #not made yet
+else:
+	privateKeyEnc, vector = removeFromFile(DRIVE)
+	if privateKeyEnc != “FILEDNE”:
+		#get password from user
+		privateKey = decryptKey(password, vector, privateKeyEnc)
+		decryptFile(DRIVE, encryptedFilePath, privateKey)
+	else:
+		#do error handling
+# for storing the files
+privateKey = encryptFile(DRIVE, hashFile)
+message, vector = encryptKey(password, privateKey)
+storeInFile(vector, message, DRIVE)
