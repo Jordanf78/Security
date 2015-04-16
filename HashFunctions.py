@@ -54,9 +54,24 @@ def hashCollector(folderPath):
         hashFileDict[i] = ourHash
     return hashFileDict
 
+# INPUT: 2 dictionaries with hashes
+# OUTPUT: list of file names that have changed
+# Compares the hashes of two dictionaries and 
+def compareHashes(newHashDict, oldHashDict):
+    unmatchedHashList = []
+    for i in newHashDict.keys():
+        # check if file has been hashed before
+        if oldHashDict[i] != None:
+            # hashes match?
+            if oldHashDict[i] != newHashDict[i]:
+                unmatchedHashList.append(i)
+    return unmatchedHashList
+                
 ##def main():
-##    print(availableDrives())
-##    print(hashCollector(r"C:\Users\Jarid\HashFolder"))
+##    a = hashCollector(r"C:\Users\Jarid\HashFolder")
+##    b = {'C:\\Users\\Jarid\\HashFolder\\HashSubFolder\\b.txt': '81dc9bdb52d04dc20036dbd8313ed055', 'C:\\Users\\Jarid\\HashFolder\\a.txt': '912ec803b2ce49e4a541068d495ab570'}
+##    print(a,b)
+##    print(compareHashes(a, b))
 ##
 ##if __name__ == "__main__":
 ##    main()
