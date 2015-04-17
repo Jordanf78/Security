@@ -29,6 +29,20 @@ def storeHashes(DRIVE, hashDict):
         file.write(string)
     file.close()
 
+# INPUT: DRIVE
+# OUTPUT: hashDict or FILEDNE if path is not found
+# return the hashDict we stored in the file previously
+def readHashes(DRIVE):
+    if(os.path.exists(DRIVE + r'SecurityFolder\HashFile.txt')):
+        file = open(DRIVE + r'SecurityFolder\HashFile.txt', 'r')
+        hashDict = {}
+        for line in file:
+            file, spacer, hashValue = line.partition(" - ")
+            hashDict[file] = hashValue
+        return hashDict
+    else:
+        return "FILEDNE"
+
 # INPUT: drive for data storage, hash dict file (absolute path w/ drive letter)
 # OUTPUT: private key or "FILEDNE" if file doesn't exist
 # The hash dict file is encrypted for transfer to the google drive.
@@ -73,6 +87,7 @@ def decryptFile(DRIVE, encryptedFile, key):
 ##def main():
 ##    d = {'C:\\Users\\Jarid\\HashFolder\\HashSubFolder\\b.txt': '81dc9bdb52d04dc20036dbd8313ed055', 'C:\\Users\\Jarid\\HashFolder\\a.txt': '912ec803b2ce49e4a541068d495ab570'}
 ##    storeHashes('C:\\', d)
+##    print(readHashes('C:\\'))
 ##    key = encryptFile('C:\\', r'C:\SecurityFolder\HashFile.txt')
 ##    decryptFile('C:\\', r'SecurityFolder\Encrypted.txt', key)
 ##
