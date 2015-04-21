@@ -40,6 +40,10 @@ Partial Class Form1
         Me.Refresh = New System.Windows.Forms.Button()
         Me.LogBox = New System.Windows.Forms.ListBox()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.watchpath = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LocalSignin
@@ -146,7 +150,7 @@ Partial Class Form1
         'watchlist
         '
         Me.watchlist.FormattingEnabled = True
-        Me.watchlist.Location = New System.Drawing.Point(447, 50)
+        Me.watchlist.Location = New System.Drawing.Point(447, 76)
         Me.watchlist.Name = "watchlist"
         Me.watchlist.Size = New System.Drawing.Size(325, 316)
         Me.watchlist.TabIndex = 10
@@ -156,7 +160,7 @@ Partial Class Form1
         '
         Me.FileExplorer.FormattingEnabled = True
         Me.FileExplorer.HorizontalScrollbar = True
-        Me.FileExplorer.Location = New System.Drawing.Point(16, 50)
+        Me.FileExplorer.Location = New System.Drawing.Point(16, 76)
         Me.FileExplorer.Name = "FileExplorer"
         Me.FileExplorer.Size = New System.Drawing.Size(325, 316)
         Me.FileExplorer.TabIndex = 11
@@ -164,7 +168,7 @@ Partial Class Form1
         '
         'pathbox
         '
-        Me.pathbox.Location = New System.Drawing.Point(16, 24)
+        Me.pathbox.Location = New System.Drawing.Point(16, 50)
         Me.pathbox.Name = "pathbox"
         Me.pathbox.Size = New System.Drawing.Size(325, 20)
         Me.pathbox.TabIndex = 12
@@ -200,7 +204,7 @@ Partial Class Form1
         'LogBox
         '
         Me.LogBox.FormattingEnabled = True
-        Me.LogBox.Location = New System.Drawing.Point(16, 372)
+        Me.LogBox.Location = New System.Drawing.Point(21, 419)
         Me.LogBox.Name = "LogBox"
         Me.LogBox.Size = New System.Drawing.Size(756, 134)
         Me.LogBox.TabIndex = 16
@@ -208,18 +212,60 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(658, 512)
+        Me.Button3.Location = New System.Drawing.Point(658, 559)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(114, 38)
         Me.Button3.TabIndex = 17
         Me.Button3.Text = "Clear Log"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'watchpath
+        '
+        Me.watchpath.Location = New System.Drawing.Point(447, 50)
+        Me.watchpath.Name = "watchpath"
+        Me.watchpath.Size = New System.Drawing.Size(325, 20)
+        Me.watchpath.TabIndex = 18
+        Me.watchpath.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(346, 396)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(90, 20)
+        Me.Label1.TabIndex = 19
+        Me.Label1.Text = "Event Log"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(119, 24)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(109, 20)
+        Me.Label2.TabIndex = 20
+        Me.Label2.Text = "File Explorer"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(563, 24)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(94, 20)
+        Me.Label3.TabIndex = 21
+        Me.Label3.Text = "Watch List"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 562)
+        Me.ClientSize = New System.Drawing.Size(784, 609)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.watchpath)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LogBox)
         Me.Controls.Add(Me.Refresh)
@@ -263,5 +309,9 @@ Partial Class Form1
     Friend WithEvents Refresh As System.Windows.Forms.Button
     Friend WithEvents LogBox As System.Windows.Forms.ListBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents watchpath As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 
 End Class

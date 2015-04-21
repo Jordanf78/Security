@@ -11,6 +11,7 @@ Public Class Form1
     Dim watchflag = False
     Dim FileList As New List(Of String)
     Dim LogDir = ""
+    Dim eventlogpath = "Program Data\eventlog.txt"
     
     Private Sub Check_files()
         If not My.Computer.FileSystem.FileExists(watchlistpath) Then
@@ -20,6 +21,10 @@ Public Class Form1
         End If
         If not My.Computer.FileSystem.FileExists(userpath) Then
             Dim fs As FileStream = File.Create(userpath)
+            fs.Close()
+        End If
+        If Not My.Computer.FileSystem.FileExists(eventlogpath) Then
+            Dim fs As FileStream = File.Create(eventlogpath)
             fs.Close()
         End If
     End Sub
@@ -139,6 +144,11 @@ Public Class Form1
         Button1.Visible = False
         Button2.Visible = False
         Refresh.Visible = False
+        watchpath.Visible = False
+        LogBox.Visible = False
+        Label1.Visible = False
+        Label2.Visible = False
+        Label3.Visible = False
     End Sub
 
     Private Sub draw_login()
@@ -214,6 +224,11 @@ Public Class Form1
         Button1.Visible = True
         Button2.Visible = True
         Refresh.Visible = True
+        LogBox.Visible = True
+        pathbox.Visible = True
+        Label1.Visible = True
+        Label2.Visible = True
+        Label3.Visible = True
         load_explorer()
     End Sub
 
@@ -246,7 +261,7 @@ Public Class Form1
     End Sub
 
 
-    Private Sub pathbox_TextChanged(sender As Object, e As EventArgs) Handles pathbox.TextChanged
+    Private Sub pathbox_TextChanged() Handles pathbox.TextChanged
         If Directory.Exists(pathbox.Text) = True Then
             FileExplorer.Items.Clear()
             If Not pathbox.Text.Split("\").Length = 1 Then
@@ -291,18 +306,49 @@ Public Class Form1
     End Sub
 
     Private Sub refreshwatchlistbox()
-        For Each path In watchlistdb
-            If path.Split("\").Length = 1 Then
-                watchlist.Items.Add(path)
+        If Directory.Exists(watchpath.Text) = True Then
+            watchlist.Items.Clear()
+            If Not watchpath.Text.Split("\").Length = 1 Then
+                watchlist.Items.Add("...")
             End If
-            For Each seg In path.Split("\")
-                
+            For Each subdir In Directory.EnumerateDirectories(watchpath.Text())
+                watchlist.Items.Add(subdir)
             Next
-        Next
+            For Each file1 In Directory.EnumerateFiles(watchpath.Text())
+                Dim flag1 = False
+                For Each currentitem In watchlistdb
+                    If currentitem = file1 Then
+                        flag1 = True
+                    End If
+                Next
+                If flag1 = True Then
+                    watchlist.Items.Add(file1)
+                End If
+            Next
+        ElseIf watchpath.Text = "" Then
+            load_watchpath()
+        End If
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
+    End Sub
+
+    Private Sub load_watchpath()
+        watchlist.Items.Clear()
+        Dim allDrives() As DriveInfo = DriveInfo.GetDrives()
+        Dim d As DriveInfo
+        For Each d In allDrives
+            If d.IsReady = True Then
+                watchlist.Items.Add(d.Name.ToString())
+            End If
+        Next
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        watchlistdb.Remove(watchlist.SelectedItem.ToString)
+        refreshwatchlistbox()
+        pathbox_TextChanged()
     End Sub
 End Class
 
