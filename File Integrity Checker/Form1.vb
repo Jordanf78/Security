@@ -4,9 +4,9 @@ Imports System.IO
 Public Class Form1
 
 
-    Dim userpath = "ProgramData\users.txt"
+    Dim userpath = "Program Data\users.txt"
     Dim prevdir As String
-    Dim watchlistpath = "ProgramData\watchlist.txt"
+    Dim watchlistpath = "Program Data\watchlist.txt"
     Dim watchlistdb As New List(Of String)
     Dim watchflag = False
     Dim FileList As New List(Of String)
