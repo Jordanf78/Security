@@ -4,12 +4,13 @@ Imports System.IO
 Public Class Form1
 
 
-    Dim userpath = "users.txt"
+    Dim userpath = "ProgramData\users.txt"
     Dim prevdir As String
-    Dim watchlistpath = "watchlist.txt"
+    Dim watchlistpath = "ProgramData\watchlist.txt"
     Dim watchlistdb As New List(Of String)
     Dim watchflag = False
-    Dim FileList as New List(of String)
+    Dim FileList As New List(Of String)
+    Dim LogDir = ""
     
     Private Sub Check_files()
         If not My.Computer.FileSystem.FileExists(watchlistpath) Then
@@ -83,6 +84,23 @@ Public Class Form1
         Else
             MsgBox("Directory does not exsist. Check the path and try again.")
         End If
+    End Sub
+
+    Private Sub Load_Log()
+        LogBox.Items.Clear()
+        If File.Exists(LogDir) Then
+            For Each line In File.ReadLines(LogDir)
+                LogBox.Items.Add(line)
+            Next
+        Else
+            File.Create(LogDir)
+        End If
+    End Sub
+
+    Private Sub Clear_Log()
+        LogBox.Items.Clear()
+        File.Delete(LogDir)
+        Load_Log()
     End Sub
 
 
@@ -278,11 +296,14 @@ Public Class Form1
                 watchlist.Items.Add(path)
             End If
             For Each seg In path.Split("\")
-                For Each 
-                Next
+                
             Next
+        Next
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+    End Sub
 End Class
 
 

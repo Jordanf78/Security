@@ -38,6 +38,8 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Refresh = New System.Windows.Forms.Button()
+        Me.LogBox = New System.Windows.Forms.ListBox()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LocalSignin
@@ -144,7 +146,7 @@ Partial Class Form1
         'watchlist
         '
         Me.watchlist.FormattingEnabled = True
-        Me.watchlist.Location = New System.Drawing.Point(422, 50)
+        Me.watchlist.Location = New System.Drawing.Point(447, 50)
         Me.watchlist.Name = "watchlist"
         Me.watchlist.Size = New System.Drawing.Size(325, 316)
         Me.watchlist.TabIndex = 10
@@ -170,7 +172,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(347, 85)
+        Me.Button1.Location = New System.Drawing.Point(358, 85)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(69, 65)
         Me.Button1.TabIndex = 13
@@ -179,7 +181,7 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(347, 251)
+        Me.Button2.Location = New System.Drawing.Point(358, 242)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(69, 56)
         Me.Button2.TabIndex = 14
@@ -188,18 +190,38 @@ Partial Class Form1
         '
         'Refresh
         '
-        Me.Refresh.Location = New System.Drawing.Point(347, 173)
+        Me.Refresh.Location = New System.Drawing.Point(358, 167)
         Me.Refresh.Name = "Refresh"
         Me.Refresh.Size = New System.Drawing.Size(69, 55)
         Me.Refresh.TabIndex = 15
         Me.Refresh.Text = "Refresh"
         Me.Refresh.UseVisualStyleBackColor = True
         '
+        'LogBox
+        '
+        Me.LogBox.FormattingEnabled = True
+        Me.LogBox.Location = New System.Drawing.Point(16, 372)
+        Me.LogBox.Name = "LogBox"
+        Me.LogBox.Size = New System.Drawing.Size(756, 134)
+        Me.LogBox.TabIndex = 16
+        Me.LogBox.Visible = False
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(658, 512)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(114, 38)
+        Me.Button3.TabIndex = 17
+        Me.Button3.Text = "Clear Log"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 562)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.LogBox)
         Me.Controls.Add(Me.Refresh)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -239,5 +261,7 @@ Partial Class Form1
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Refresh As System.Windows.Forms.Button
+    Friend WithEvents LogBox As System.Windows.Forms.ListBox
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 
 End Class
