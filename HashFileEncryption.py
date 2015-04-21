@@ -60,6 +60,7 @@ def encryptFile(DRIVE, hashFile):
             message = file.read(64)
         outputFile.close()
         file.close()
+        os.remove(hashFile)
         # for decryption
         return privateKey
     else:
