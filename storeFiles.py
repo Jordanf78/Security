@@ -18,7 +18,7 @@ def encryptFileForDrive(DRIVE, encryptFile):
         cipher = PKCS1_OAEP.new(key)
         file = open(encryptFile, 'rb')
         randNum = randint(2**16, 2**32)
-        outputFile = open(str(randNum) + '.txt', 'wb')
+        outputFile = open(DRIVE + r'SecurityFolder\\' + str(randNum) + '.txt', 'wb')
         message = file.read(64)
         while message != b'':
             # use public key to encrypt 64 char messages from hashFile
