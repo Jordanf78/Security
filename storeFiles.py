@@ -26,9 +26,28 @@ def encryptFileForDrive(DRIVE, encryptFile):
             message = file.read(64)
         file.close()
         outputFile.close()
+        # check for same file name
+        indexFile = open(DRIVE + r'SecurityFolder\index.txt', 'r')
+        tempFile = open(DRIVE + r'SecurityFolder\dump', 'w')
+        for line in indexFile:
+            filePath, spacer, fileNum = line.partition(' - ')
+            # dont copy old file name
+            print(filePath, fileNum)
+            if filePath == encryptFile:
+                os.remove(DRIVE + r'SecurityFolder\\' + fileNum.strip() + '.txt')
+            else:
+                tempFile.write(line)
+        indexFile.close()
+        tempFile.close()
+        # now done storing data temporarily, can move back to index file
         indexFile = open(DRIVE + r'SecurityFolder\index.txt', 'w')
+        tempFile = open(DRIVE + r'SecurityFolder\dump', 'r')
+        for line in tempFile:
+            indexFile.write(line + '\n')
         indexFile.write(encryptFile + ' - ' + str(randNum))
         indexFile.close()
+        tempFile.close()
+        os.remove(DRIVE + r'SecurityFolder\dump')
     else:
         return "FILEDNE"
 
