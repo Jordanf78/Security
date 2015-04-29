@@ -20,3 +20,43 @@ C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File 
 C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\File Integrity Checker.exe
 C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\File Integrity Checker.pdb
 C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\File Integrity Checker.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Core.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Drive.v2.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.GData.AccessControl.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.GData.Client.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.GData.Documents.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.GData.Extensions.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\GoogleDriveExplorer.Core.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\log4net.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Zlib.Portable.dll
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Auth.PlatformServices.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Auth.PlatformServices.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Core.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Core.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Drive.v2.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.Drive.v2.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.PlatformServices.pdb
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Google.Apis.PlatformServices.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\log4net.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\bin\Debug\Zlib.Portable.xml
+C:\Users\Jordan\Documents\GitHub\Security\File Integrity Checker\obj\Debug\File Integrity Checker.vbproj.App.config

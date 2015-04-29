@@ -1,60 +1,127 @@
 Imports System
 Imports System.IO
+Imports Google
+Imports GoogleDriveExplorer
 
 Public Class Form1
 
-
-    Dim userpath = "Program Data\users.txt"
+    Dim rootDir = File_Integrity_Checker.My.Computer.FileSystem.CurrentDirectory()
+    Dim userpath = rootDir + "\" + "Program Data\users.txt"
     Dim prevdir As String
-    Dim watchlistpath = "Program Data\watchlist.txt"
-    Dim watchlistdb As New List(Of String)
+    Dim watchlistpath = rootDir + "\" + "Program Data\watchlist.txt"
     Dim watchflag = False
     Dim FileList As New List(Of String)
-    Dim LogDir = ""
-    Dim eventlogpath = "Program Data\eventlog.txt"
-    
+    Dim logDir = rootDir + "\" + "Program Data\eventlog.txt"
+    Dim watchdict As New Dictionary(Of String, String)
+    Dim lendict As New Dictionary(Of Integer, String)
+
+    Private Sub build_dictionaries()
+        Try
+            For Each line In File.ReadAllLines(watchlistpath)
+                watchdict.Add(line.Split(",")(0), line.Split("\")(1))
+                Dim leng = line.Split(",")(0).Split("\").Length()
+                If lendict.Keys.Contains(leng) Then
+                    Dim temp = lendict.Item(leng)
+                    lendict.Remove(leng)
+                    lendict.Add(leng, temp + "," + line.Split(",")(0))
+                Else
+                    lendict.Add(line.Split(",")(0).Split("\").Length(), line.Split("\")(0))
+                End If
+            Next
+        Catch ex As Exception
+            clean_watchfile()
+            build_dictionaries()
+        End Try
+        Return
+    End Sub
+
+    Private Sub clean_watchfile()
+        Dim outlist As New List(Of String)
+        For Each line In File.ReadAllLines(watchlistpath())
+            If Not outlist.Contains(line) Then
+                outlist.Add(line)
+            End If
+        Next
+        File.Delete(watchlistpath)
+        Dim f1 = File.CreateText(watchlistpath)
+        For Each line In outlist
+            f1.WriteLine(line)
+        Next
+        Return
+    End Sub
+
+    ''' <summary>
+    '''This function takes the path of an item and returns any children in the watchlist
+    ''' </summary>
+    ''' <param name="Parent"></param>
+    ''' <remarks></remarks>
+    Public Function isChildOf(Parent As String)
+        Dim plen = Parent.Split("\").Length()
+        Dim result As New List(Of String)
+        For Each entry In lendict.Item(plen + 1).Split(",")
+            If entry.ToString.Contains(Parent.ToString) Then
+                result.Add(entry)
+            End If
+        Next
+        Return result
+    End Function
+
+    Public Function isParentOf(Child As String)
+        Dim clen = Child.Split("\").Length()
+        Dim result As New List(Of String)
+        For Each entry In lendict.Item(clen - 1).Split(",")
+            If Child.Contains(entry) Then
+                result.Add(entry)
+            End If
+        Next
+        Return result
+    End Function
+
     Private Sub Check_files()
-        If not My.Computer.FileSystem.FileExists(watchlistpath) Then
+        If Not My.Computer.FileSystem.DirectoryExists(rootDir + "\Program Data") Then
+            My.Computer.FileSystem.CreateDirectory(rootDir + "\Program Data")
+        End If
+        If Not My.Computer.FileSystem.FileExists(watchlistpath) Then
             Dim fs As FileStream = File.Create(watchlistpath)
             fs.Close()
             watchflag = True
         End If
-        If not My.Computer.FileSystem.FileExists(userpath) Then
+        If Not My.Computer.FileSystem.FileExists(userpath) Then
             Dim fs As FileStream = File.Create(userpath)
             fs.Close()
         End If
-        If Not My.Computer.FileSystem.FileExists(eventlogpath) Then
-            Dim fs As FileStream = File.Create(eventlogpath)
+        If Not My.Computer.FileSystem.FileExists(logDir) Then
+            Dim fs As FileStream = File.Create(logDir)
             fs.Close()
         End If
     End Sub
     
     Private Sub Clean_watchlist()
-        For Each item In watchlistdb
-            For Each item2 In watchlistdb
+        For Each item In watchdict
+            For Each item2 In watchdict
                 If item = item2 Then
                     watchlist.Items.Remove(watchlist.Items.IndexOf(item))
                 End If
             Next
         Next
-    End Sub 
-    
+    End Sub
+
     Private Sub Refresh_Watchlistbox()
-        For Each item In watchlistdb
+        For Each item In watchdict
             watchlist.Items.Add(item)
         Next
     End Sub
-    
+
     Private Sub Load_Watchlist()
         For Each file1 In File.ReadLines(watchlistpath)
-            For Each curfile In watchlistdb
+            For Each curfile In watchdict
                 If Not file1.ToString = curfile.ToString Then
                     watchlist.Items.Add(file1)
                 End If
             Next
         Next
     End Sub
-    
+
     Private Sub Load_All_Files()
         Dim allDrives() As DriveInfo = DriveInfo.GetDrives()
         Dim d As DriveInfo
@@ -67,11 +134,11 @@ Public Class Form1
         Next
 
     End Sub
-    
+
     Private Sub SearchFiles()
 
     End Sub
-    
+
     Private Sub Refresh_click(sender As Object, e As EventArgs) Handles Refresh.Click
         If Directory.Exists(pathbox.Text.ToString) Then
             FileExplorer.Items.Clear()
@@ -110,14 +177,10 @@ Public Class Form1
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Check_files()
         Me.Size = New Size(400, 200)
         draw_login_buttons()
-        Check_files()
-        If watchflag = False Then
-            Load_Watchlist()
-        Else
-            watchlist.Items.Add("")
-        End If
+        build_dictionaries()
     End Sub
 
     Private Sub draw_login_buttons()
@@ -249,14 +312,15 @@ Public Class Form1
 
     Private Sub FileExplorer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FileExplorer.DoubleClick
         If FileExplorer.SelectedItem.ToString = "..." Then
-            Dim newdir = Directory.GetParent(pathbox.Text)
-            If pathbox.Text.Length = 3 Then
+            Dim var = pathbox.Text.ToString.Remove(pathbox.Text.Length - 1, 1)
+            Dim newdir = Directory.GetParent(pathbox.Text.Remove(pathbox.Text.Length - 1, 1))
+            If var.Length < 3 Then
                 pathbox.Text = ""
             Else
                 pathbox.Text = newdir.ToString()
             End If
-        Else
-            pathbox.Text = FileExplorer.SelectedItem.ToString()
+        ElseIf FileExplorer.SelectedItem.ToString.ToCharArray.Last() = "\" Then
+            pathbox.Text = pathbox.Text + FileExplorer.SelectedItem.ToString()
         End If
     End Sub
 
@@ -268,17 +332,17 @@ Public Class Form1
                 FileExplorer.Items.Add("...")
             End If
             For Each subdir In Directory.EnumerateDirectories(pathbox.Text())
-                FileExplorer.Items.Add(subdir)
+                FileExplorer.Items.Add(subdir.Split("\").Last.ToString + "\")
             Next
             For Each file1 In Directory.EnumerateFiles(pathbox.Text())
                 Dim flag1 = False
-                For Each currentitem In watchlistdb
+                For Each currentitem In watchdict
                     If currentitem = file1 Then
                         flag1 = True
                     End If
                 Next
                 If flag1 = False Then
-                    FileExplorer.Items.Add(file1)
+                    FileExplorer.Items.Add(file1.Split("\").Last.ToString)
                 End If
             Next
         ElseIf pathbox.Text = "" Then
@@ -288,19 +352,31 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Not FileExplorer.SelectedItem = "..." And Not FileExplorer.SelectedItem = "" Then
-            watchlistdb.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString)
+            If FileExplorer.SelectedItem.ToString.ToCharArray.Last() = "\" Then
+                Dim choice = MsgBox("Would you like to include subdirectories as well?", MsgBoxStyle.YesNoCancel, FileExplorer.SelectedItem.ToString)
+                If choice = MsgBoxResult.Yes Then
+                    watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "SD")
+                ElseIf choice = MsgBoxResult.No Then
+                    watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "D")
+                ElseIf choice = MsgBoxResult.Cancel Then
+
+                End If
+            Else
+                watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "F")
+            End If
         End If
+
     End Sub
 
     Private Sub watchlist_add(path As String)
         Dim found = False
-        For Each curpath In watchlistdb
+        For Each curpath In watchdict
             If path = curpath Then
                 found = True
             End If
         Next
         If found = False Then
-            watchlistdb.Add(path)
+            watchdict.Add(path)
             refreshwatchlistbox()
         End If
     End Sub
@@ -316,7 +392,7 @@ Public Class Form1
             Next
             For Each file1 In Directory.EnumerateFiles(watchpath.Text())
                 Dim flag1 = False
-                For Each currentitem In watchlistdb
+                For Each currentitem In watchdict
                     If currentitem = file1 Then
                         flag1 = True
                     End If
@@ -346,10 +422,12 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        watchlistdb.Remove(watchlist.SelectedItem.ToString)
+        watchdict.Remove(watchlist.SelectedItem.ToString)
         refreshwatchlistbox()
         pathbox_TextChanged()
     End Sub
+
+
 End Class
 
 
