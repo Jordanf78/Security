@@ -19,6 +19,12 @@ FileIntegrityChecker
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
+</member><member name="M:File_Integrity_Checker.Form1.isChildOf(System.String)">
+	<summary>
+This function takes the path of an item and returns any children in the watchlist
+ </summary>
+	<param name="Parent"></param>
+	<remarks></remarks>
 </member>
 </members>
 </doc>

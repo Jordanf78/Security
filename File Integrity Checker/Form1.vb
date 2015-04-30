@@ -97,8 +97,8 @@ Public Class Form1
     End Sub
     
     Private Sub Clean_watchlist()
-        For Each item In watchdict
-            For Each item2 In watchdict
+        For Each item In watchdict.Keys()
+            For Each item2 In watchdict.Keys()
                 If item = item2 Then
                     watchlist.Items.Remove(watchlist.Items.IndexOf(item))
                 End If
@@ -107,20 +107,34 @@ Public Class Form1
     End Sub
 
     Private Sub Refresh_Watchlistbox()
-        For Each item In watchdict
-            watchlist.Items.Add(item)
-        Next
+        If watchpath.Text() = "" Then
+            watchlist.Items.Clear()
+            For Each path In lendict.Item(1).Split("\")
+                watchlist.Items.Add(path)
+            Next
+        Else
+            Try
+                Dim children = isChildOf(watchpath.Text())
+                watchlist.Items.Clear()
+                watchlist.Items.Add("...")
+                For Each child In children
+                    watchlist.Items.Add(child.ToString.Trim(watchpath.Text()))
+                Next
+            Catch ex As Exception
+
+            End Try
+        End If
     End Sub
 
-    Private Sub Load_Watchlist()
-        For Each file1 In File.ReadLines(watchlistpath)
-            For Each curfile In watchdict
-                If Not file1.ToString = curfile.ToString Then
-                    watchlist.Items.Add(file1)
-                End If
-            Next
+    Private Function update_watchlistfile()
+        File.Delete(watchlistpath)
+        Dim f = File.CreateText(watchlistpath)
+        For Each item In watchdict.Keys()
+            f.WriteLine(item, watchdict.Item(item))
         Next
-    End Sub
+        f.Close()
+        Return 1
+    End Function
 
     Private Sub Load_All_Files()
         Dim allDrives() As DriveInfo = DriveInfo.GetDrives()
@@ -212,6 +226,7 @@ Public Class Form1
         Label1.Visible = False
         Label2.Visible = False
         Label3.Visible = False
+
     End Sub
 
     Private Sub draw_login()
@@ -336,7 +351,7 @@ Public Class Form1
             Next
             For Each file1 In Directory.EnumerateFiles(pathbox.Text())
                 Dim flag1 = False
-                For Each currentitem In watchdict
+                For Each currentitem In watchdict.Keys()
                     If currentitem = file1 Then
                         flag1 = True
                     End If
@@ -356,55 +371,26 @@ Public Class Form1
                 Dim choice = MsgBox("Would you like to include subdirectories as well?", MsgBoxStyle.YesNoCancel, FileExplorer.SelectedItem.ToString)
                 If choice = MsgBoxResult.Yes Then
                     watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "SD")
+                    update_watchlistfile()
+                    Refresh_Watchlistbox()
                 ElseIf choice = MsgBoxResult.No Then
                     watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "D")
+                    update_watchlistfile()
+                    Refresh_Watchlistbox()
                 ElseIf choice = MsgBoxResult.Cancel Then
 
                 End If
             Else
                 watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "F")
+                update_watchlistfile()
+                Refresh_Watchlistbox()
             End If
         End If
 
     End Sub
 
-    Private Sub watchlist_add(path As String)
-        Dim found = False
-        For Each curpath In watchdict
-            If path = curpath Then
-                found = True
-            End If
-        Next
-        If found = False Then
-            watchdict.Add(path)
-            refreshwatchlistbox()
-        End If
-    End Sub
 
-    Private Sub refreshwatchlistbox()
-        If Directory.Exists(watchpath.Text) = True Then
-            watchlist.Items.Clear()
-            If Not watchpath.Text.Split("\").Length = 1 Then
-                watchlist.Items.Add("...")
-            End If
-            For Each subdir In Directory.EnumerateDirectories(watchpath.Text())
-                watchlist.Items.Add(subdir)
-            Next
-            For Each file1 In Directory.EnumerateFiles(watchpath.Text())
-                Dim flag1 = False
-                For Each currentitem In watchdict
-                    If currentitem = file1 Then
-                        flag1 = True
-                    End If
-                Next
-                If flag1 = True Then
-                    watchlist.Items.Add(file1)
-                End If
-            Next
-        ElseIf watchpath.Text = "" Then
-            load_watchpath()
-        End If
-    End Sub
+
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
@@ -423,11 +409,14 @@ Public Class Form1
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         watchdict.Remove(watchlist.SelectedItem.ToString)
-        refreshwatchlistbox()
+        Refresh_Watchlistbox()
         pathbox_TextChanged()
     End Sub
 
 
+    Private Sub watchpath_TextChanged(sender As Object, e As EventArgs) Handles watchpath.TextChanged
+        Refresh_Watchlistbox()
+    End Sub
 End Class
 
 
