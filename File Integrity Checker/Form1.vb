@@ -14,6 +14,74 @@ Public Class Form1
     Dim logDir = rootDir + "\" + "Program Data\eventlog.txt"
     Dim watchdict As New Dictionary(Of String, String)
     Dim lendict As New Dictionary(Of Integer, String)
+    dim newwatchdict as New Disctionary(of String,String)
+    Dim Events as New List(Of String)
+    
+    Private withEvent SecCounter as new System.Windows.Forms.Timer
+    
+    Public Sub New(TickValue as integer)
+        SecCounter = new System.Windows.Forms.Timer
+        SecCounter.Interval = TickValue
+    End Sub
+    
+    Public Sub StartTimer
+        SecCounter.start
+    End Sub
+    
+    Public Sub StopTimer
+        SecCounter.Stop
+    End Sub
+    
+    Private Sub Timer_Tick Handles SecCounter.Tick
+    
+    End Sub
+    
+    Private Sub Check_Changes()
+        
+    End Sub
+    
+    
+    '''Event Log Form:
+    '''Path, DateModified, DateDetected
+    '''
+    Private Sub LoadEventLog()
+        Dim f = File.Open("EventLogPath")
+        for each line in f.Readlines()
+            events.Items.add(line)
+            Dim split1 = line.Split(",")
+            Dim path = split1(0)
+            Dim DateModified = split1(1)
+            Dim DateDetected = split1(2)
+            eventlogbox.add(DateDetected.ToString()+":"+ vbTab+
+                            DateModified.ToString()+vbTab+path.ToString())
+        Next
+    End Sub
+    
+    
+    '''data can be Path, DateModified, or DateDetected
+    Public Function SortEventLog(data as String)
+        If data == "Path" Then
+            eventlogbox.Items.Clear()
+            for each line in eventlog
+                Dim split1 = line.Split(",")
+                Dim path = split1(0)
+                Dim DateModified = split1(1)
+                Dim DateDetected = split1(2)
+                If eventlogbox.Items.Count() == 0 Then
+                    eventlogbox.Items.add(path.ToString+":"+vbTab+
+                                            DateModified+ vbTab+DateDetected)
+                Else
+                    for each path in eventlogbox
+                        If path.ToString.Split("\")(0).Split("")(0).ToChar() <
+                        
+                    Next
+                End If
+            Next
+        Else
+            
+        End If
+        Return 1    
+    End Function
 
     Private Sub build_dictionaries()
         Try
