@@ -50,7 +50,7 @@ def encryptFileForDrive(DRIVE, encryptFile):
         indexFile.close()
         tempFile.close()
         os.remove(DRIVE + r'SecurityFolder\dump')
-        return privateKey
+        return privateKey, randFile
     else:
         return "FILEDNE"
 
@@ -63,10 +63,9 @@ def decryptFileForDrive(DRIVE, randFile, key):
     indexFile = open(DRIVE + r'SecurityFolder\index.txt', 'r')
     for line in indexFile:
         filePath, spacer, fileNum = line.partition(' - ')
-        print(fileNum, randFile)
+        fileNum = DRIVE + r'SecurityFolder\\' + fileNum + '.txt'
         if fileNum == randFile:
-            outputFileName = fileNum
-            print(outputFileName)
+            outputFileName = filePath
     indexFile.close()
         
     #decrypt the file
@@ -86,7 +85,7 @@ def decryptFileForDrive(DRIVE, randFile, key):
         return "FILEDNE"
 
 def main():
-    key = encryptFileForDrive("C:\\", 'C:\\Users\\Jarid\\HashFolder\\a.txt')
+    key, randFile = encryptFileForDrive("C:\\", 'C:\\Users\\Jarid\\HashFolder\\a.txt')
     decryptFileForDrive("C:\\", randFile, key)
 
 if __name__ == "__main__":
