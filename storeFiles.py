@@ -7,6 +7,7 @@ import os, hashlib, re
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.PublicKey import RSA
 from random import randint
+from shutil import move
 
 # INPUT: drive for data storage, file to be encrypted
 # OUTPUT: private key or "FILEDNE" if file doesn't exist
@@ -35,7 +36,7 @@ def encryptFileForDrive(DRIVE, encryptFile):
             filePath, spacer, fileNum = line.partition(' - ')
             # dont copy old file name
             if filePath == encryptFile:
-                os.remove(DRIVE + r'SecurityFolder\\' + fileNum.strip() + '.txt')
+                os.remove(DRIVE + 'SecurityFolder\\' + fileNum.strip() + '.txt')
             else:
                 tempFile.write(line)
         indexFile.close()
@@ -50,7 +51,7 @@ def encryptFileForDrive(DRIVE, encryptFile):
         indexFile.close()
         tempFile.close()
         os.remove(DRIVE + r'SecurityFolder\dump')
-        return privateKey, randFile
+        return privateKey#, randFile #testing purposes
     else:
         return "FILEDNE"
 
@@ -59,20 +60,25 @@ def encryptFileForDrive(DRIVE, encryptFile):
 # Decrypts the file when retrieved from the google drive.
 def decryptFileForDrive(DRIVE, randFile, key):
 
+    # retrieve output file name
     outputFileName = ''
     indexFile = open(DRIVE + r'SecurityFolder\index.txt', 'r')
+    tempFile = open(DRIVE + r'SecurityFolder\dump', 'w')
     for line in indexFile:
         filePath, spacer, fileNum = line.partition(' - ')
         fileNum = DRIVE + r'SecurityFolder\\' + fileNum + '.txt'
         if fileNum == randFile:
             outputFileName = filePath
+        else:
+            # handles removing the selected filepath
+            tempFile.write(line)
+    tempFile.close()
     indexFile.close()
         
-    #decrypt the file
-    path = DRIVE + randFile
-    if os.path.exists(path):
+    # decrypt the file
+    if os.path.exists(randFile):
         cipher = PKCS1_OAEP.new(key)
-        file = open(path, 'rb')
+        file = open(randFile, 'rb')
         outputFile = open(outputFileName, 'wb')
         # 128 because 2 encrypted char = 1 unencrypted char
         message = file.read(128)
@@ -84,10 +90,17 @@ def decryptFileForDrive(DRIVE, randFile, key):
     else:
         return "FILEDNE"
 
-def main():
-    key, randFile = encryptFileForDrive("C:\\", 'C:\\Users\\Jarid\\HashFolder\\a.txt')
-    decryptFileForDrive("C:\\", randFile, key)
+    # rename dump file to index
+    os.remove(DRIVE + r'SecurityFolder\index.txt')
+    move(DRIVE + r'SecurityFolder\dump', DRIVE + r'SecurityFolder\index.txt')
+    #remove unnecessary file
+    os.remove(randFile)
+    
 
-if __name__ == "__main__":
-    main()
+##def main():
+##    key, randFile = encryptFileForDrive("C:\\", 'C:\\Users\\Jarid\\HashFolder\\a.txt')
+##    decryptFileForDrive("C:\\", randFile, key)
+##
+##if __name__ == "__main__":
+##    main()
 
