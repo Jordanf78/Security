@@ -1,2 +1,3 @@
 C:\.jagex_cache_32\
 C:\
+C:\$AVG\

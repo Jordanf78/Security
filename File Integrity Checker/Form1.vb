@@ -14,30 +14,28 @@ Public Class Form1
     Dim logDir = rootDir + "\" + "Program Data\eventlog.txt"
     Dim watchdict As New Dictionary(Of String, String)
     Dim lendict As New Dictionary(Of Integer, String)
-    dim newwatchdict as New Disctionary(of String,String)
-    Dim Events as New List(Of String)
+    Dim newwatchdict As New Dictionary(Of String, String)
+    Dim Eventlist As New List(Of String)
+    Dim SecCounter As Timer
     
-    Private withEvent SecCounter as new System.Windows.Forms.Timer
-    
-    Public Sub New(TickValue as integer)
-        SecCounter = new System.Windows.Forms.Timer
-        SecCounter.Interval = TickValue
-    End Sub
-    
-    Public Sub StartTimer
-        SecCounter.start
-    End Sub
-    
-    Public Sub StopTimer
-        SecCounter.Stop
-    End Sub
-    
-    Private Sub Timer_Tick Handles SecCounter.Tick
-    
-    End Sub
+
+
     
     Private Sub Check_Changes()
         
+    End Sub
+
+    Private Sub enumwatchdictpaths()
+        For Each newpath In watchdict.Keys()
+            Dim pathstring As List(Of String) = newpath.Split("\").ToList()
+            Dim num = 0
+            While num < pathstring.Count
+
+                If watchdict.ContainsKey() Then
+
+                End If
+            End While
+        Next
     End Sub
     
     
@@ -45,42 +43,38 @@ Public Class Form1
     '''Path, DateModified, DateDetected
     '''
     Private Sub LoadEventLog()
-        Dim f = File.Open("EventLogPath")
-        for each line in f.Readlines()
-            events.Items.add(line)
+        Dim f = File.ReadAllLines("EventLogPath")
+        For Each line In f
+            Eventlist.Add(line)
             Dim split1 = line.Split(",")
             Dim path = split1(0)
             Dim DateModified = split1(1)
             Dim DateDetected = split1(2)
-            eventlogbox.add(DateDetected.ToString()+":"+ vbTab+
-                            DateModified.ToString()+vbTab+path.ToString())
+            LogBox.Items.Add(DateDetected.ToString() + ":" + vbTab +
+                            DateModified.ToString() + vbTab + path.ToString())
         Next
     End Sub
-    
-    
+
+
     '''data can be Path, DateModified, or DateDetected
-    Public Function SortEventLog(data as String)
-        If data == "Path" Then
-            eventlogbox.Items.Clear()
-            for each line in eventlog
+    Public Function SortEventLog(data As String)
+        If data = "Path" Then
+            LogBox.Items.Clear()
+            For Each line In Eventlist
                 Dim split1 = line.Split(",")
                 Dim path = split1(0)
                 Dim DateModified = split1(1)
                 Dim DateDetected = split1(2)
-                If eventlogbox.Items.Count() == 0 Then
-                    eventlogbox.Items.add(path.ToString+":"+vbTab+
-                                            DateModified+ vbTab+DateDetected)
-                Else
-                    for each path in eventlogbox
-                        If path.ToString.Split("\")(0).Split("")(0).ToChar() <
-                        
-                    Next
+                If LogBox.Items.Count() = 0 Then
+                    LogBox.Items.Add(path.ToString + ":" + vbTab +
+                                            DateModified + vbTab + DateDetected)
+
                 End If
             Next
         Else
-            
+
         End If
-        Return 1    
+        Return 1
     End Function
 
     Private Sub build_dictionaries()
@@ -175,23 +169,27 @@ Public Class Form1
     End Sub
 
     Private Sub Refresh_Watchlistbox()
-        If watchpath.Text() = "" Then
-            watchlist.Items.Clear()
-            For Each path In lendict.Item(1).Split("\")
-                watchlist.Items.Add(path)
-            Next
-        Else
-            Try
-                Dim children = isChildOf(watchpath.Text())
+        Try
+            If watchpath.Text() = "" Then
                 watchlist.Items.Clear()
-                watchlist.Items.Add("...")
-                For Each child In children
-                    watchlist.Items.Add(child.ToString.Trim(watchpath.Text()))
+                For Each path In lendict.Item(1).Split("\")
+                    watchlist.Items.Add(path)
                 Next
-            Catch ex As Exception
+            Else
+                Try
+                    Dim children = isChildOf(watchpath.Text())
+                    watchlist.Items.Clear()
+                    watchlist.Items.Add("...")
+                    For Each child In children
+                        watchlist.Items.Add(child.ToString.Trim(watchpath.Text()))
+                    Next
+                Catch ex As Exception
 
-            End Try
-        End If
+                End Try
+            End If
+        Catch
+
+        End Try
     End Sub
 
     Private Function update_watchlistfile()
