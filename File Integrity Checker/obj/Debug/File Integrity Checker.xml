@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+FileIntegrityChecker
+</name>
+</assembly>
+<members>
+<member name="P:File_Integrity_Checker.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:File_Integrity_Checker.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:File_Integrity_Checker.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:File_Integrity_Checker.Form1.LoadEventLog">
+Event Log Form:
+Path, DateModified, DateDetected
+
+
+</member><member name="M:File_Integrity_Checker.Form1.SortEventLog(System.String)">
+data can be Path, DateModified, or DateDetected
+
+</member><member name="M:File_Integrity_Checker.Form1.isChildOf(System.String)">
+	<summary>
+This function takes the path of an item and returns any children in the watchlist
+ </summary>
+	<param name="Parent"></param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

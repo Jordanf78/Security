@@ -1,0 +1,5 @@
+C:\Users\Jordan\Documents\GitHub\Security\Test\ZIP.zip
+,9364d84ba5362d0b810dca0754dae44e
+C:\Users\Jordan\Documents\GitHub\Security\Test\Text.txt
+,4b4843326a10871cacdf06db0019be4d
+C:\Users\Jordan\Documents\GitHub\Security\Test\Image.BMP,f6502d0bc2c7a7e8bba3f9685fcf969a

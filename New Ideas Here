@@ -1,0 +1,6 @@
+1)  The user will have the files that have been modified, sorted by extension, with
+    some information displayed on how to deal with these modifications. (malicious or bit rot)
+2)  The user can specify files to be encrypted and stored on the Google Drive.
+3)  The user can sort the files, like last modified date, to see irregularities that may be malicious. (Im working on incorporating this in the GUI)
+4)  Possibility of setting an event timer, such that the program would launch and do an update at specified intervals
+5)  Run in background mode, icon in notification area with realtime monitoring
