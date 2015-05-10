@@ -24,21 +24,35 @@ Public Class Form1
     Private Sub Check_Changes()
         
     End Sub
-
-    Private Sub enumwatchdictpaths()
-        For Each newpath In watchdict.Keys()
-            Dim pathstring As List(Of String) = newpath.Split("\").ToList()
+    
+    Private Sub expandwatchlist()
+        Dim newdict As New Dictionary(Of String, String)
+        For Each Path In watchdict.Keys
+            Dim pathsplit = Path.Split("\").ToList
             Dim num = 0
-            While num < pathstring.Count
-
-                If watchdict.ContainsKey() Then
-
+            Dim str = pathsplit(0)
+            If Not watchdict.ContainsKey(pathsplit(0) + "\") Then
+                newdict.Add(str + "\", "P")
+            End If
+            While num < pathsplit.Count
+                str = str + "\" + pathsplit(num)
+                If Not watchdict.ContainsKey(str) Then
+                    newdict.Add(str, "P")
                 End If
+                Dim len = str.Split("\").Count()
+                If lendict.ContainsKey(len) Then
+                    Dim tmp = lendict.Item(len)
+                    lendict.Remove(len)
+                    lendict.Add(len, tmp + "," + str)
+                Else
+                    lendict.Add(len, str)
+                End If
+                num = num + 1
             End While
         Next
+        watchdict = newdict
+        update_watchlistfile()
     End Sub
-    
-    
     '''Event Log Form:
     '''Path, DateModified, DateDetected
     '''
@@ -79,7 +93,8 @@ Public Class Form1
 
     Private Sub build_dictionaries()
         Try
-            For Each line In File.ReadAllLines(watchlistpath)
+            Dim f = File.ReadAllLines(watchlistpath)
+            For Each line In f
                 watchdict.Add(line.Split(",")(0), line.Split("\")(1))
                 Dim leng = line.Split(",")(0).Split("\").Length()
                 If lendict.Keys.Contains(leng) Then
@@ -109,6 +124,7 @@ Public Class Form1
         For Each line In outlist
             f1.WriteLine(line)
         Next
+        f1.Close()
         Return
     End Sub
 
@@ -170,6 +186,7 @@ Public Class Form1
 
     Private Sub Refresh_Watchlistbox()
         Try
+            expandwatchlist()
             If watchpath.Text() = "" Then
                 watchlist.Items.Clear()
                 For Each path In lendict.Item(1).Split("\")
@@ -433,24 +450,28 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Not FileExplorer.SelectedItem = "..." And Not FileExplorer.SelectedItem = "" Then
-            If FileExplorer.SelectedItem.ToString.ToCharArray.Last() = "\" Then
-                Dim choice = MsgBox("Would you like to include subdirectories as well?", MsgBoxStyle.YesNoCancel, FileExplorer.SelectedItem.ToString)
-                If choice = MsgBoxResult.Yes Then
-                    watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "SD")
-                    update_watchlistfile()
-                    Refresh_Watchlistbox()
-                ElseIf choice = MsgBoxResult.No Then
-                    watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "D")
-                    update_watchlistfile()
-                    Refresh_Watchlistbox()
-                ElseIf choice = MsgBoxResult.Cancel Then
+            Try
+                If FileExplorer.SelectedItem.ToString.ToCharArray.Last() = "\" Then
+                    Dim choice = MsgBox("Would you like to include subdirectories as well?", MsgBoxStyle.YesNoCancel, FileExplorer.SelectedItem.ToString)
 
+                    If choice = MsgBoxResult.Yes Then
+                        watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "SD")
+                        Clean_watchlist()
+                        Refresh_Watchlistbox()
+                    ElseIf choice = MsgBoxResult.No Then
+                        watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "D")
+                        Clean_watchlist()
+                        Refresh_Watchlistbox()
+                    ElseIf choice = MsgBoxResult.Cancel Then
+
+                    End If
+                Else
+                    watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "F")
+                    Clean_watchlist()
+                    Refresh_Watchlistbox()
                 End If
-            Else
-                watchdict.Add(pathbox.Text.ToString + FileExplorer.SelectedItem.ToString, "F")
-                update_watchlistfile()
-                Refresh_Watchlistbox()
-            End If
+            Catch
+            End Try
         End If
 
     End Sub
