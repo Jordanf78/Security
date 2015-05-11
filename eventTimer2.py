@@ -32,7 +32,6 @@ class Manager(object):
         self._event.set()
 
 if __name__ == '__main__':
-    # Print "Hello World!" every 5 seconds
     
     import time
 
@@ -40,7 +39,7 @@ if __name__ == '__main__':
         print ("Hello World!")
 
     timer = Manager()
-    timer.add_Timer(hello, 5)
+    timer.add_Timer(hello, 10)
 
     while True:
         time.sleep(.1)
